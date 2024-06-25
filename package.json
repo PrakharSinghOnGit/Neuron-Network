@@ -7,5 +7,9 @@
   },
   "peerDependencies": {
     "typescript": "^5.0.0"
+  },
+  "dependencies": {
+    "canvas": "^2.11.2",
+    "pngjs": "^7.0.0"
   }
 }
