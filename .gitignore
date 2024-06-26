@@ -4,6 +4,7 @@
 
 test.txt
 train.txt
+*.class
 
 logs
 _.log
