@@ -1,14 +1,14 @@
-public class Layer {
-    private Neuron[] neurons;
+class Layer {
+    Neuron[] neurons;
 
-    public Layer(int numNeurons, int numInputs) {
+    public Layer(int numNeurons, int numInputsPerNeuron) {
         neurons = new Neuron[numNeurons];
         for (int i = 0; i < numNeurons; i++) {
-            neurons[i] = new Neuron(numInputs);
+            neurons[i] = new Neuron(numInputsPerNeuron);
         }
     }
 
-    public double[] activate(double[] inputs) {
+    public double[] feedForward(double[] inputs) {
         double[] outputs = new double[neurons.length];
         for (int i = 0; i < neurons.length; i++) {
             outputs[i] = neurons[i].activate(inputs);

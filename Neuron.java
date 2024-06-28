@@ -1,24 +1,25 @@
-
 import java.util.Random;
 
-public class Neuron {
-    private double[] weights;
-    private double bias;
-    private double output;
+class Neuron {
+    double[] weights;
+    double bias;
+    double output;
 
     public Neuron(int numInputs) {
-        // Initialize weights using a random value based on a formula similar to Xavier initialization
+        Random rand = new Random();
         weights = new double[numInputs];
-        Random random = new Random();
-        double limit = Math.sqrt(2.0 / numInputs);
         for (int i = 0; i < numInputs; i++) {
-            weights[i] = random.nextDouble() * limit;
+            weights[i] = rand.nextGaussian();
         }
-        bias = 0.0;
+        bias = rand.nextGaussian();
     }
 
-    public double activate(double[] input) {
-        output = sigmoid(dot(input, weights) + bias);
+    public double activate(double[] inputs) {
+        double sum = bias;
+        for (int i = 0; i < weights.length; i++) {
+            sum += weights[i] * inputs[i];
+        }
+        output = sigmoid(sum);
         return output;
     }
 
@@ -26,12 +27,7 @@ public class Neuron {
         return 1.0 / (1.0 + Math.exp(-x));
     }
 
-    private double dot(double[] a, double[] b) {
-        double sum = 0.0;
-        for (int i = 0; i < a.length; i++) {
-            sum += a[i] * b[i];
-        }
-        return sum;
+    public double sigmoidDerivative() {
+        return output * (1 - output);
     }
 }
-

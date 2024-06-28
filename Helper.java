@@ -25,22 +25,19 @@ class Helper {
             e.printStackTrace();
         }
     }
-    double[][][] readData(String filename, int len) throws Exception {
+    double[][] readData(String filename, int len) throws Exception {
         FileReader fr = new FileReader(filename);
         BufferedReader br = new BufferedReader(fr);
         String line;
         int count = 0;
-        double[][][] Data = new double[len][2][784];
+        double[][] Data = new double[len][784];
         while ((line = br.readLine()) != null && count < len) {
             String[] values = line.split(",");
             double[] pixels = new double[values.length];
-            double[] output = new double[10];
-            output[Integer.parseInt(values[0])] = 1;
             for (int i = 1; i < values.length; i++) {
                 pixels[i] = Integer.parseInt(values[i]) / 255.0;
             }
-            Data[count][0] = output;
-            Data[count][1] = pixels;
+            Data[count] = pixels;
             count++;
         }
         br.close();
